@@ -1,0 +1,97 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using VRTK;
+using System;
+
+public class RaycastController : MonoBehaviour
+{
+
+    Transform headsetTransform;
+    Vector3 fwd;
+
+    LineRenderer lineRenderer;
+
+    private float totalSessionPlaytime;
+    private int positiveHitCounter;
+    private int negativeHitCounter;
+    private Time positiveHitTimer;
+    private Time negativeHitTimer;
+
+    private int layerMask;
+    private bool foundHeadset = false;
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        lineRenderer = GetComponent<LineRenderer>();
+
+        //src: https://docs.unity3d.com/ScriptReference/Physics.Raycast.html
+        // Bit shift the index of the layer (8) to get a bit mask
+        layerMask = 1 << 8;
+    }
+
+    IEnumerator FindHeadset()
+    {
+        yield return new WaitForSeconds(1f);
+    }
+    // Update is called once per frame
+    void Update()
+    {
+        //src: https://answers.unity.com/questions/1104868/start-and-stop-time-help.html
+        totalSessionPlaytime += Time.deltaTime;
+
+        headsetTransform = VRTK_DeviceFinder.DeviceTransform(VRTK_DeviceFinder.Devices.Headset);
+
+        if (headsetTransform != null)
+        {
+            fwd = headsetTransform.forward;
+        }
+        else
+        {
+            StartCoroutine("FindHeadset");
+        }
+
+
+        RaycastHit hit;
+        lineRenderer.SetPosition(0, headsetTransform.position);
+
+        if (Physics.Raycast(headsetTransform.position, fwd, out hit, Mathf.Infinity, layerMask))
+        {
+            string hitTag = hit.transform.tag;
+
+            switch (hitTag)
+            {
+                case "PositiveHit":
+                    positiveHitCounter += 1;
+
+                    break;
+
+                case "NegativeHit":
+                    negativeHitCounter += 1;
+                    break;
+
+                default:
+                    break;
+            }
+
+            lineRenderer.SetPosition(1, hit.point);
+            Debug.Log("Did hit " + hit.transform.name);
+
+
+
+
+            var minutes = Mathf.Floor(time / 60);
+            var seconds = time % 60; //Use the euclidean division for the seconds.
+            var fraction = (time * 100) % 100;
+
+            //update the label value
+            //text.text = string.Format("{0:00} : {1:00} : {2:00}", minutes, seconds, fraction);
+        }
+        else
+        {
+            lineRenderer.SetPosition(1, fwd * 500);
+        }
+    }
+}
