@@ -47,15 +47,17 @@ public class RaycastController : MonoBehaviour
         if (headsetTransform != null)
         {
             fwd = headsetTransform.forward;
+            lineRenderer.SetPosition(0, headsetTransform.position);
         }
         else
         {
             StartCoroutine("FindHeadset");
+            lineRenderer.SetPosition(0, headsetTransform.position);
         }
 
 
         RaycastHit hit;
-        lineRenderer.SetPosition(0, headsetTransform.position);
+        
 
         if (Physics.Raycast(headsetTransform.position, fwd, out hit, Mathf.Infinity, layerMask))
         {
@@ -82,9 +84,9 @@ public class RaycastController : MonoBehaviour
 
 
 
-            var minutes = Mathf.Floor(time / 60);
+            /*var minutes = Mathf.Floor(time / 60);
             var seconds = time % 60; //Use the euclidean division for the seconds.
-            var fraction = (time * 100) % 100;
+            var fraction = (time * 100) % 100;*/
 
             //update the label value
             //text.text = string.Format("{0:00} : {1:00} : {2:00}", minutes, seconds, fraction);

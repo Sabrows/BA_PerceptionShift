@@ -8,6 +8,11 @@ TagManager:
   - FxTemporaire
   - PositiveHit
   - NegativeHit
+  - ExcludeTeleport
+  - TeleportIgnore
+  - AllowTeleport
+  - Kira
+  - Lewis
   layers:
   - Default
   - TransparentFX
