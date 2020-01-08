@@ -61,7 +61,7 @@ public class RaycastController : MonoBehaviour
         else
         {
             StartCoroutine("FindHeadset");
-            lineRenderer.SetPosition(0, headsetTransform.position);
+            //lineRenderer.SetPosition(0, headsetTransform.position);
         }
 
         RaycastHit hit;
@@ -83,7 +83,7 @@ public class RaycastController : MonoBehaviour
                     break;
             }
 
-            lineRenderer.SetPosition(1, hit.point);
+            //lineRenderer.SetPosition(1, hit.point);
             
             // Debug.Log("Did hit " + hit.transform.name);
 
@@ -96,7 +96,7 @@ public class RaycastController : MonoBehaviour
         }
         else
         {
-            lineRenderer.SetPosition(1, fwd * 500);
+            //lineRenderer.SetPosition(1, fwd * 500);
         }
     }
 }

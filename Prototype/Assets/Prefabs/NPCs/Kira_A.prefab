@@ -558,7 +558,7 @@ Animator:
   m_GameObject: {fileID: 6846670449173607458}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 535156c74f90dde48be444746515be0d, type: 3}
-  m_Controller: {fileID: 9100000, guid: 08e2ffa30cf21a74f9943562263466f2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3bd42382d1af11d4480fc5bf0adb3db3, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -1138,7 +1138,7 @@ GameObject:
   - component: {fileID: 5109724253674609256}
   m_Layer: 0
   m_Name: Head
-  m_TagString: NegativeHit
+  m_TagString: PositiveHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
