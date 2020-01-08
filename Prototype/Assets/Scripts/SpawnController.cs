@@ -41,7 +41,7 @@ public class SpawnController : MonoBehaviour
 
             // Get random index (0 -> smile, 1 -> angry) to decide wether smile or angry animator controller gets applied
             var randomControllerIndex = Random.Range(0, 2);
-            Debug.Log("randomControllerIndex: " + randomControllerIndex);
+            // Debug.Log("randomControllerIndex: " + randomControllerIndex);
 
             // Apply correct animator controller
             // smile && free
@@ -50,16 +50,17 @@ public class SpawnController : MonoBehaviour
                 if (randomCharacterPrefab.transform.tag == "Kira")
                 {
                     randomCharacterPrefab.GetComponent<Animator>().runtimeAnimatorController = kiraAnimatorControllers[randomControllerIndex] as RuntimeAnimatorController;
-                    characterPrefabs.Remove(randomCharacterPrefab);
                     smileContollerCounter++;
                 }
                 else
                 {
                     randomCharacterPrefab.GetComponent<Animator>().runtimeAnimatorController = lewisAnimatorControllers[randomControllerIndex] as RuntimeAnimatorController;
-                    characterPrefabs.Remove(randomCharacterPrefab);
                     smileContollerCounter++;
                 }
-                Debug.Log("SmileCounter: " + smileContollerCounter + ", AngryCounter :" + angryControllerCounter);
+
+                randomCharacterPrefab.GetComponentInChildren<MeshCollider>().tag = "PositiveHit";
+                characterPrefabs.Remove(randomCharacterPrefab);
+                // Debug.Log("SmileCounter: " + smileContollerCounter + ", AngryCounter :" + angryControllerCounter);
             }
             // angry && free
             else if (randomControllerIndex == 1 && angryControllerCounter != amountAngry)
@@ -67,16 +68,17 @@ public class SpawnController : MonoBehaviour
                 if (randomCharacterPrefab.transform.tag == "Kira")
                 {
                     randomCharacterPrefab.GetComponent<Animator>().runtimeAnimatorController = kiraAnimatorControllers[randomControllerIndex] as RuntimeAnimatorController;
-                    characterPrefabs.Remove(randomCharacterPrefab);
                     angryControllerCounter++;
                 }
                 else
                 {
                     randomCharacterPrefab.GetComponent<Animator>().runtimeAnimatorController = lewisAnimatorControllers[randomControllerIndex] as RuntimeAnimatorController;
-                    characterPrefabs.Remove(randomCharacterPrefab);
                     angryControllerCounter++;
                 }
-                Debug.Log("SmileCounter: " + smileContollerCounter + ", AngryCounter :" + angryControllerCounter);
+
+                randomCharacterPrefab.GetComponentInChildren<MeshCollider>().tag = "NegativeHit";
+                characterPrefabs.Remove(randomCharacterPrefab);
+                // Debug.Log("SmileCounter: " + smileContollerCounter + ", AngryCounter :" + angryControllerCounter);
             }
             // smile && locked
             else if (randomControllerIndex == 0 && smileContollerCounter == amountSmile)
@@ -84,16 +86,17 @@ public class SpawnController : MonoBehaviour
                 if (randomCharacterPrefab.transform.tag == "Kira")
                 {
                     randomCharacterPrefab.GetComponent<Animator>().runtimeAnimatorController = kiraAnimatorControllers[randomControllerIndex + 1] as RuntimeAnimatorController;
-                    characterPrefabs.Remove(randomCharacterPrefab);
                     angryControllerCounter++;
                 }
                 else
                 {
                     randomCharacterPrefab.GetComponent<Animator>().runtimeAnimatorController = lewisAnimatorControllers[randomControllerIndex + 1] as RuntimeAnimatorController;
-                    characterPrefabs.Remove(randomCharacterPrefab);
                     angryControllerCounter++;
                 }
-                Debug.Log("SMILE && LOCKED - SmileCounter: " + smileContollerCounter + ", AngryCounter :" + angryControllerCounter);
+
+                randomCharacterPrefab.GetComponentInChildren<MeshCollider>().tag = "NegativeHit";
+                characterPrefabs.Remove(randomCharacterPrefab);
+                // Debug.Log("SMILE && LOCKED - SmileCounter: " + smileContollerCounter + ", AngryCounter :" + angryControllerCounter);
             }
             // angry && locked
             else if (randomControllerIndex == 1 && angryControllerCounter == amountAngry)
@@ -101,21 +104,22 @@ public class SpawnController : MonoBehaviour
                 if (randomCharacterPrefab.transform.tag == "Kira")
                 {
                     randomCharacterPrefab.GetComponent<Animator>().runtimeAnimatorController = kiraAnimatorControllers[randomControllerIndex - 1] as RuntimeAnimatorController;
-                    characterPrefabs.Remove(randomCharacterPrefab);
                     smileContollerCounter++;
                 }
                 else
                 {
                     randomCharacterPrefab.GetComponent<Animator>().runtimeAnimatorController = lewisAnimatorControllers[randomControllerIndex - 1] as RuntimeAnimatorController;
-                    characterPrefabs.Remove(randomCharacterPrefab);
                     smileContollerCounter++;
                 }
-                Debug.Log("ANGRY && LOCKED - SmileCounter: " + smileContollerCounter + ", AngryCounter :" + angryControllerCounter);
+
+                randomCharacterPrefab.GetComponentInChildren<MeshCollider>().tag = "PositiveHit";
+                characterPrefabs.Remove(randomCharacterPrefab);
+                // Debug.Log("ANGRY && LOCKED - SmileCounter: " + smileContollerCounter + ", AngryCounter :" + angryControllerCounter);
             }
 
             // Instantiate characterPrefab at current Spawnpoint position with rotation
             Instantiate(randomCharacterPrefab, position, rotation);
-            Debug.Log(randomCharacterPrefab.name);
+            // Debug.Log(randomCharacterPrefab.name);
 
         }
     }

@@ -196,8 +196,8 @@ GameObject:
   - component: {fileID: 7833669885200585031}
   - component: {fileID: 3126281200261250374}
   m_Layer: 8
-  m_Name: Kira_Head_B
-  m_TagString: NegativeHit
+  m_Name: Head
+  m_TagString: PositiveHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -633,7 +633,7 @@ GameObject:
   - component: {fileID: 7036005704062392082}
   - component: {fileID: 8770114111210588578}
   m_Layer: 0
-  m_Name: Kira_Pants_B
+  m_Name: Pants
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -860,7 +860,7 @@ GameObject:
   - component: {fileID: 4472013233552474669}
   - component: {fileID: 1365314254323894607}
   m_Layer: 0
-  m_Name: Kira_Shoes
+  m_Name: Shoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1397,7 +1397,7 @@ GameObject:
   - component: {fileID: 524698557859225772}
   - component: {fileID: 7813869649398466879}
   m_Layer: 0
-  m_Name: Kira_Tank
+  m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1932,7 +1932,7 @@ GameObject:
   - component: {fileID: 3777698958983579243}
   - component: {fileID: 4951467808320317705}
   m_Layer: 0
-  m_Name: Kira_Hair_E
+  m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2777,7 +2777,7 @@ Animator:
   m_GameObject: {fileID: 9218895418868462537}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 535156c74f90dde48be444746515be0d, type: 3}
-  m_Controller: {fileID: 9100000, guid: 08e2ffa30cf21a74f9943562263466f2, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3bd42382d1af11d4480fc5bf0adb3db3, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1

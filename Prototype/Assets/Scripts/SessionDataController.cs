@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 public class SessionDataController : MonoBehaviour
 {
@@ -13,23 +14,31 @@ public class SessionDataController : MonoBehaviour
     {
         sessionData = new SessionData()
         {
-            playerID = UnityEngine.Random.Range(0f, 10f),
             sessionTimestamp = System.DateTime.Now,
         };
+
+        if (SceneManager.GetActiveScene().name == "SampleScene")
+        {
+            sessionData.sessionID = Guid.NewGuid().ToString();
+        }
+        else if (SceneManager.GetActiveScene().name.Contains("Approach"))
+        {
+            sessionData.randomApproachID = SceneManager.GetActiveScene().buildIndex.ToString();
+        }
+        
+        // Invoke dummy saving function starting at 2 sec and repeating every 10 sec
+        InvokeRepeating("SaveSessionData", 0.0f, 10.0f);
     }
 
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine("SaveSessionData");
+
     }
 
-    IEnumerator SaveSessionData()
+    void SaveSessionData()
     {
-        string json =  JsonUtility.ToJson(sessionData);
-        if (File.Exists(Application.dataPath + "/save.txt")){
-            File.WriteAllText(Application.dataPath + "/save.txt", json);
-        }
-        yield return new WaitForSecondsRealtime(5f);
+        string json = JsonUtility.ToJson(sessionData);
+        File.AppendAllText(Application.dataPath + "/save.txt", json);
     }
 }

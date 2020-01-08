@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 3798810584007584208}
   - component: {fileID: 2835764219868663603}
   m_Layer: 0
-  m_Name: Kira_Tank
+  m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -477,7 +477,7 @@ GameObject:
   - component: {fileID: 1188934849501382323}
   - component: {fileID: 2312418988044733771}
   m_Layer: 8
-  m_Name: Kira_Head_B
+  m_Name: Head
   m_TagString: NegativeHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -728,7 +728,7 @@ GameObject:
   - component: {fileID: 4769326745356410242}
   - component: {fileID: 3902282680940810579}
   m_Layer: 0
-  m_Name: Kira_Hair_C
+  m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1909,7 +1909,7 @@ GameObject:
   - component: {fileID: 7521215088878818457}
   - component: {fileID: 5018688525573020565}
   m_Layer: 0
-  m_Name: Kira_Shoes
+  m_Name: Shoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2288,7 +2288,7 @@ GameObject:
   - component: {fileID: 6041533085792660043}
   - component: {fileID: 4692718596143207734}
   m_Layer: 0
-  m_Name: Kira_Pants_A
+  m_Name: Pants
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

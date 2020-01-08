@@ -43,7 +43,7 @@ GameObject:
   - component: {fileID: 7101612351890153017}
   - component: {fileID: 7441698778863553940}
   m_Layer: 8
-  m_Name: Lewis_Head_B
+  m_Name: Head
   m_TagString: PositiveHit
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1058,8 +1058,8 @@ Transform:
   - {fileID: 7162229380481400751}
   - {fileID: 7162365569997811117}
   - {fileID: 7168202497083363329}
-  - {fileID: 7168416675091170535}
   - {fileID: 7168147803118108381}
+  - {fileID: 7168416675091170535}
   - {fileID: 7168240677122692299}
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -1708,7 +1708,7 @@ GameObject:
   - component: {fileID: 7162365569997811117}
   - component: {fileID: 7098734818881440783}
   m_Layer: 0
-  m_Name: 'Lewis_Hair_D '
+  m_Name: Hair
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1870,7 +1870,7 @@ GameObject:
   - component: {fileID: 7168147803118108381}
   - component: {fileID: 7098323369148181253}
   m_Layer: 0
-  m_Name: Lewis_Shirt_C
+  m_Name: Shirt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1889,7 +1889,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7168501616851659637}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7098323369148181253
 SkinnedMeshRenderer:
@@ -2002,7 +2002,7 @@ GameObject:
   - component: {fileID: 7168416675091170535}
   - component: {fileID: 7098263684051876195}
   m_Layer: 0
-  m_Name: Lewis_Pants_B
+  m_Name: Pants
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2017,11 +2017,11 @@ Transform:
   m_GameObject: {fileID: 7165027653244415325}
   m_LocalRotation: {x: 0.00000014479028, y: -0.0000000037252907, z: 0.0000000055879363,
     w: 1}
-  m_LocalPosition: {x: -0.000000022351745, y: -0.000000074505806, z: 0.000000037252914}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7168501616851659637}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!137 &7098263684051876195
 SkinnedMeshRenderer:
@@ -2505,7 +2505,7 @@ GameObject:
   - component: {fileID: 7168240677122692299}
   - component: {fileID: 7098792556266605655}
   m_Layer: 0
-  m_Name: Lewis_Shoes_B
+  m_Name: Shoes
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
