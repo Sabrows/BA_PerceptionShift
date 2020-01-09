@@ -21,6 +21,9 @@ public class Raycaster : MonoBehaviour
     [SerializeField]
     float maxHitDuration = 3f;
 
+    [SerializeField]
+    bool lineRendererIsActive = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,15 @@ public class Raycaster : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (!lineRendererIsActive)
+        {
+            lineRenderer.enabled = false;
+        }
+        else
+        {
+            lineRenderer.enabled = true;
+        }
+
         headsetTransform = VRTK_DeviceFinder.DeviceTransform(VRTK_DeviceFinder.Devices.Headset);
 
         if (headsetTransform != null)

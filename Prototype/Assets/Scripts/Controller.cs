@@ -34,11 +34,11 @@ public class Controller : MonoBehaviour
 
     HighlightingApproaches[] currentProcedure;
 
-    [SerializeField]
+    [SerializeField][Range(0,3)]
     //Leave default on 0
-    int currentProcedureIndex = 1;
+    int currentProcedureIndex = 0;
 
-    [SerializeField]
+    [SerializeField][Range(-1, 10)]
     //Leave default on -1
     int currentRoundIndex = -1;
 
