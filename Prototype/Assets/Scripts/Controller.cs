@@ -5,9 +5,6 @@ using VRTK;
 
 public class Controller : MonoBehaviour
 {
-    VRTK_HeadsetFade headsetFade;
-
-    int roundCounter = 0;
 
     [SerializeField]
     Spawner spawner;
@@ -15,15 +12,52 @@ public class Controller : MonoBehaviour
     [SerializeField]
     Raycaster raycaster;
 
+    public enum HighlightingApproaches
+    {
+        None,
+        Border,
+        Arrow
+    }
+
+    enum Procedures
+    {
+        A,
+        B
+    }
+
+    [SerializeField]
+    Procedures procedures = Procedures.A;
+
+    HighlightingApproaches[] testProcedure_A = new HighlightingApproaches[] { HighlightingApproaches.None, HighlightingApproaches.Border, HighlightingApproaches.None };
+
+    HighlightingApproaches[] testProcedure_B = new HighlightingApproaches[] { HighlightingApproaches.None, HighlightingApproaches.Arrow, HighlightingApproaches.None };
+
+    HighlightingApproaches[] currentProcedure;
+
+    [SerializeField]
+    //Leave default on 0
+    int currentProcedureIndex = 1;
+
+    [SerializeField]
+    //Leave default on -1
+    int currentRoundIndex = -1;
+
+    [SerializeField][Range(1f, 5f)]
+    float timeUntilSpawn = 1f;
+
     // Start is called before the first frame update
     void Start()
     {
-        headsetFade = GetComponent<VRTK_HeadsetFade>();
-        headsetFade.Fade(Color.blue, 5f);
+        if (procedures == Procedures.A)
+        {
+            currentProcedure = testProcedure_A;
+        }
+        else
+        {
+            currentProcedure = testProcedure_B;
+        }
 
-        spawner.Spawn(roundCounter);
-
-        InvokeRepeating("PrintRoundcounter", 0, 10f);
+        TriggerNextRound();
     }
 
     // Update is called once per frame
@@ -32,37 +66,35 @@ public class Controller : MonoBehaviour
 
     }
 
-    void PrintRoundcounter()
+    public void TriggerNextRound()
     {
-        Debug.Log("Roundcounter: " + roundCounter);
+        //keep track on currentRound
+        currentRoundIndex++;
+
+        if (currentRoundIndex >= 10)
+        {
+
+            if (currentProcedureIndex == currentProcedure.Length - 1)
+            {
+                UnityEditor.EditorApplication.isPlaying = false;
+                return;
+            }
+            currentRoundIndex = 0;
+            currentProcedureIndex++;
+        }
+
+        //Remove old chars
+        spawner.RemovePreviousCharacters();
+
+        Invoke("TriggerSpawn", timeUntilSpawn);
     }
 
-    public void nextRound()
+    void TriggerSpawn()
     {
-        if (roundCounter < 10)
-        {
-            headsetFade.Fade(Color.black, 2f);
-            headsetFade.Unfade(2f);
+        //spawn new NPCs
+        spawner.Spawn(currentRoundIndex, currentProcedure[currentProcedureIndex]);
 
-            //reset hitDuration timer
-            raycaster.hitDuration = 0f;
-            //FIXME: raycaster not hitting when view faded
-
-            //spawn new NPCs
-            spawner.Spawn(roundCounter);
-
-            //keep track on round number
-            roundCounter++;
-
-            //re-enable raycast
-            raycaster.raycastEnabled = true;
-
-        }
-        else
-        {
-            Debug.Log("Test is over, you reached round: " + roundCounter);
-            UnityEditor.EditorApplication.isPlaying = false;
-        }
+        //re-enable raycast
+        raycaster.raycastEnabled = true;
     }
-
 }

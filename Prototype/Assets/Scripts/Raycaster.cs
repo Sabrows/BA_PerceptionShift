@@ -16,7 +16,10 @@ public class Raycaster : MonoBehaviour
 
     public bool raycastEnabled = true;
 
-    public float hitDuration = 0;
+    private float hitDuration = 0;
+
+    [SerializeField]
+    float maxHitDuration = 3f;
 
     // Start is called before the first frame update
     void Start()
@@ -42,19 +45,23 @@ public class Raycaster : MonoBehaviour
                 if (Physics.Raycast(headsetTransform.position, fwd, out hit, Mathf.Infinity, layerMask))
                 {
                     hitDuration += Time.deltaTime;
-                    Debug.Log(hit.transform.name + " was hit for " + hitDuration + "sec");
-                    //FIXME: check if 10f equals 10 sec
-                    if (hitDuration >= 3f)
+
+                    //FIXME: check how many sec
+                    if (hitDuration >= maxHitDuration)
                     {
+                        //Debug.Log(hit.transform.name + " was hit for " + hitDuration);
                         raycastEnabled = false;
-                        controller.nextRound();
+                        //Save data here
+                        hitDuration = 0f;
+                        controller.TriggerNextRound();
+
                     }
                 }
             }
         }
         else
         {
-            Debug.Log("headsetTransform is null!");
+            //Debug.Log("headsetTransform is null!");
             StartCoroutine("FindHeadset");
         }
     }
