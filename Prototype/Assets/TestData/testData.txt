@@ -1,0 +1,1 @@
+{"testID":"10.01.2020 21:51:07","selectedTestProcedure":"","usedRandomSeed":0,"shuffledPositiveCharacterOrder":[],"shuffledNegativeCharacterOrder":[],"totalTestPositiveHitCounter":0,"totalTestNegativeHitCounter":0,"totalTestPositiveTimer":"","totalTestNegativeTimer":"","totalTestTimer":"","characterSpawnsLog":[],"testerChoicesLog":[]}
