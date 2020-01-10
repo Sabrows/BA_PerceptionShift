@@ -347,6 +347,8 @@ MonoBehaviour:
   alreadySpawnedCharacters: []
   borderHighlight: {fileID: 2100000, guid: 3d938759d8b7a414988ec3261fb5265d, type: 2}
   outlineWidth: 0.005
+  arrow: {fileID: 1462776504459000867, guid: d88f07b38459a4e41a14eafd52ee2aa5, type: 3}
+  arrowHeight: 3.5
 --- !u!21 &500534373
 Material:
   serializedVersion: 6
@@ -745,8 +747,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spawner: {fileID: 481637021}
   raycaster: {fileID: 1550289129}
-  procedures: 0
-  currentProcedureIndex: 0
+  procedures: 1
+  currentProcedureIndex: 1
   currentRoundIndex: -1
   timeUntilSpawn: 1
 --- !u!1 &1550289127
@@ -796,7 +798,7 @@ MonoBehaviour:
   controller: {fileID: 1457547669}
   raycastEnabled: 1
   maxHitDuration: 1.5
-  lineRendererActive: 0
+  lineRendererIsActive: 0
 --- !u!120 &1550289130
 LineRenderer:
   m_ObjectHideFlags: 0

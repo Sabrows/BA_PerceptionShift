@@ -11,6 +11,7 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     List<GameObject> spawnpoints;
 
+    [Header("Character Lists")]
     [SerializeField]
     List<GameObject> posCharacters = new List<GameObject>();
 
@@ -26,11 +27,19 @@ public class Spawner : MonoBehaviour
     [SerializeField]
     List<GameObject> alreadySpawnedCharacters = new List<GameObject>();
 
+    [Header("Border Settings")]
     [SerializeField]
     Material borderHighlight;
 
     [SerializeField][Range(0.001f, 0.01f)]
     float outlineWidth = 0.005f;
+
+    [Header("Arrow Settings")]
+    [SerializeField]
+    GameObject arrow;
+
+    [SerializeField][Range(1f, 10f)]
+    float arrowHeight;
 
     // Start is called before the first frame update
     void Start()
@@ -123,6 +132,10 @@ public class Spawner : MonoBehaviour
 
             case Controller.HighlightingApproaches.Arrow:
                 //Instantiate Arrow over char Position
+                var spawnedPosCharPosition = spawnedPosChar.gameObject.transform.position;
+                spawnedPosCharPosition.y += arrowHeight;
+                GameObject spawnedArrow = Instantiate(arrow, spawnedPosCharPosition, arrow.gameObject.transform.rotation);
+                spawnedArrow.transform.parent = spawnedPosChar.gameObject.transform;
                 break;
         }
         alreadySpawnedCharacters.Add(spawnedPosChar);
