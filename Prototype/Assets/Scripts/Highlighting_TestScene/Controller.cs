@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
-using System.Diagnostics;
 using System;
 
 public class Controller : MonoBehaviour
@@ -37,55 +36,169 @@ public class Controller : MonoBehaviour
     [SerializeField] [Range(-1, 10)] public int currentRoundIndex = -1; //Default = -1, public for Log generation
     [SerializeField] [Range(1f, 5f)] float timeUntilSpawn = 1f;
 
-    private string selectedTestProcedureName;
-    TestData testData;
-    Stopwatch stopwatch;
-    TimeSpan totalTestTimeSpan;
+    private string currentProcedureName;
+    private TestData testData;
     private bool isInRound = false;
-    private float roundTimer = 0f;
-    private Dictionary<string, float> roundTimers = new Dictionary<string, float>();
+    private bool isInApproach = false;
+    private float[,] timerPerApproach;
+    private float[,] roundTimerPerApproach;
+    private Dictionary<int, string>[] roundTimersDictionaries;
 
     void Awake()
     {
-        testData = CreateNewTestDataInstance();
+        timerPerApproach = new float[currentProcedure.Length, 1];
+        roundTimerPerApproach = new float[currentProcedure.Length, amountOfRounds];
+        roundTimersDictionaries = new Dictionary<int, string>[currentProcedure.Length];
+        testData = InitializeTestData(testData);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        stopwatch = new Stopwatch();
-
         if (procedures == Procedures.A)
         {
             currentProcedure = testProcedure_A;
-            selectedTestProcedureName = "testProcedure_A";
+            currentProcedureName = "testProcedure_A";
         }
         else
         {
             currentProcedure = testProcedure_B;
-            selectedTestProcedureName = "testProcedure_B";
+            currentProcedureName = "testProcedure_B";
         }
 
         TriggerNextRound();
-        stopwatch.Start();
     }
 
     // Update is called once per frame
     void Update()
     {
-        CheckRoundTimer();
+        UpdateApproachTimer();
+        UpdateRoundTimer();
     }
+
+    private TestData InitializeTestData(TestData testDataToInitialize)
+    {
+        testDataToInitialize = new TestData
+        {
+            testID = (System.DateTime.Now).ToString(), //TEST ID
+            approachData = new ApproachData[currentProcedure.Length], //APPROACH DATA []
+        };
+
+        return testDataToInitialize;
+    }
+
+    private void TriggerSpawn()
+    {
+        isInRound = true; //Start roundTimer
+        isInApproach = true; //Start approachTimer
+        spawner.Spawn(currentRoundIndex, currentProcedure[currentProcedureIndex]);
+        raycaster.raycastEnabled = true; //re-enable raycast
+    }
+
+    private void EndTest()
+    {
+        testDataSaver.SaveTestDataToFile(CollectTestData(testData)); //Save data finally
+        UnityEditor.EditorApplication.isPlaying = false; //End Application
+    }
+
+    private TestData CollectTestData(TestData testDataToFill)
+    {
+        /* General Data */
+        testDataToFill.selectedTestProcedureName = currentProcedureName; //SELECTED TEST PROCEDURE
+        testDataToFill.usedRandomSeed = spawner.GetUsedRandomSeed(); //USED RANDOM SEED
+        testDataToFill.positiveCharacterOrderNameList = spawner.GetCharacterList("positiveCharacterOrderNameList"); //POSITIVE CHARACTER ORDER NAME LIST
+        testDataToFill.negativeCharacterOrderNameList = spawner.GetCharacterList("negativeCharacterOrderNameList"); //NEGATIVE CHARACTER ORDER NAME LIST
+
+        /* Per Approach Data */
+        for (int i = 0; i < testDataToFill.approachData.Length; i++)
+        {
+            //* Counter *//
+            int temPosCounter = raycaster.GetHitCounter("positiveHitCounter", i);
+            int tempNegCounter = raycaster.GetHitCounter("negativeHitCounter", i);
+            if (temPosCounter != -1)
+            {
+                testDataToFill.approachData[i].positiveHitCounter = temPosCounter; //APPROACH DATA [] POSITIVE HIT COUNTER
+            }
+
+            if (tempNegCounter != -1)
+            {
+                testDataToFill.approachData[i].negativeHitCounter = tempNegCounter; //APPROACH DATA [] NEGATIVE HIT COUNTER
+            }
+
+            //* Timer *//
+            TimeSpan tempApprTimer = TimeSpan.FromSeconds(timerPerApproach[i, 1]);
+            testDataToFill.approachData[i].approachTimer = FormatTimeSpan(tempApprTimer); //APPROACH DATA [] APPROACH TIMER
+
+            TimeSpan temPosTimer = raycaster.GetTimer("positiveHitTimer", i);
+            TimeSpan tempNegTimer = raycaster.GetTimer("negativeHitTimer", i);
+            if (temPosTimer != TimeSpan.Zero)
+            {
+                testDataToFill.approachData[i].positiveHitTimer = FormatTimeSpan(temPosTimer); //APPROACH DATA [] POSITIVE HIT TIMER
+            }
+
+            if (tempNegTimer != TimeSpan.Zero)
+            {
+                testDataToFill.approachData[i].negativeHitTimer = FormatTimeSpan(tempNegTimer); //APPROACH DATA [] NEGATIVE HIT TIMER
+            }
+
+            
+            testDataToFill.approachData[i].roundTimers = ; //TODO: APPROACH DATA [] ROUND TIMERS
+        }
+
+        /* Log Data */
+        testDataToFill.characterSpawnsLog = spawner.GetSpawnsLog(); //CHARACTER SPAWNS LOG
+        testDataToFill.testerChoicesLog = raycaster.GetChoicesLog(); //TESTER CHOICES LOG
+
+        return testDataToFill;
+    }
+
+    private string FormatTimeSpan(TimeSpan timeSpan)
+    {
+        string formattedTimeSpanString = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
+        //FIXME: If result doesn't look good, try this (from https://gamedev.stackexchange.com/questions/80968/cant-consistently-add-to-timespan-for-unity-game)
+        //string formattedTimeSpanString = String.Format("{0}:{1}:{2}",timeSpan.Minutes,timeSpan.Seconds, timeSpan.Milliseconds);
+        return formattedTimeSpanString;
+    }
+
+    private void UpdateApproachTimer()
+    {
+        if (isInApproach)
+        {
+            timerPerApproach[currentProcedureIndex, 1] += Time.deltaTime;
+        }
+    }
+
+    private void UpdateRoundTimer()
+    {
+        if (isInRound)
+        {
+            roundTimerPerApproach[currentProcedureIndex, currentRoundIndex] += Time.deltaTime;
+        }
+    }
+
+    private void SaveRoundTimer()
+    {
+        Dictionary<int, string> roundTimers = new Dictionary<int, string>();
+        var intKey = currentRoundIndex;
+
+        //Get and Format roundTimer value
+
+        for (int i = 0; i < )
+        TimeSpan tempValue = TimeSpan.FromSeconds(roundTimerPerApproach[currentProcedureIndex, currentRoundIndex]);
+        var stringValue = FormatTimeSpan(tempValue);
+
+        roundTimers.Add(intKey, stringValue); // Save into Dictionary
+    }
+
 
     public void TriggerNextRound()
     {
         isInRound = false; //Stop roundTimer
-        SaveRoundTimer(); //Save roundTimer to dictionary
         currentRoundIndex++; //Keep track on currentRound
         if (currentRoundIndex >= amountOfRounds)
         {
-            CollectTestData(testData); //FIXME: comment in for FINAL
-            testDataSaver.SaveTestDataToFile(testData); //FIXME: comment in for FINAL
-
+            SaveRoundTimer(); //Save round times for approach to dictionary
+            isInApproach = false; //Next Approach, stop measuring time
             if (currentProcedureIndex == currentProcedure.Length - 1) //If true, end test
             {
                 EndTest();
@@ -96,121 +209,5 @@ public class Controller : MonoBehaviour
         }
         spawner.RemovePreviousCharacters(); //Remove old NPCs
         Invoke("TriggerSpawn", timeUntilSpawn); //Spawn new NPCs
-    }
-
-    void TriggerSpawn()
-    {
-        spawner.Spawn(currentRoundIndex, currentProcedure[currentProcedureIndex]);
-        raycaster.raycastEnabled = true; //re-enable raycast
-        isInRound = true; //Start roundTimer
-    }
-
-    void EndTest()
-    {
-        if (stopwatch.IsRunning)
-        {
-            stopwatch.Stop(); //Stop measuring totalTestTimeSpan
-            totalTestTimeSpan = stopwatch.Elapsed;
-        }
-
-        //FIXME: uncomment for FINAL
-        CollectTestData(testData); //Collect test data finally
-
-        //FIXME: uncomment for FINAL
-        testDataSaver.SaveTestDataToFile(testData); //Save data finally
-
-        UnityEditor.EditorApplication.isPlaying = false; //End Application
-    }
-
-    //creates new TestData struct and initializes the ID with DateTime
-    public TestData CreateNewTestDataInstance()
-    {
-        TestData testData = new TestData
-        {
-            testID = (System.DateTime.Now).ToString(), //TODO: TEST ID
-        };
-
-        return testData;
-    }
-
-    void CollectTestData(TestData testData)
-    {
-        /* General Info */
-        testData.selectedTestProcedure = selectedTestProcedureName; //TODO: SELECTED TEST PROCEDURE
-        testData.usedRandomSeed = spawner.GetUsedRandomSeed(); //TODO: USED RANDOM SEED
-        testData.shuffledPositiveCharacterOrder = spawner.GetCharacterList("shuffledPositiveCharacterOrder"); //TODO: SHUFFLED POSITIVE CHARACTER ORDER
-        testData.shuffledNegativeCharacterOrder = spawner.GetCharacterList("shuffledNegativeCharacterOrder"); //TODO: SHUFFLED NEGATIVE CHARACTER ORDER
-
-        /* Total Test Data */
-        int temPosCounter = raycaster.GetHitCounter("totalTestPositiveHitCounter");
-        int tempNegCounter = raycaster.GetHitCounter("totalTestNegativeHitCounter");
-        if (temPosCounter != -1)
-        {
-            testData.totalTestPositiveHitCounter = temPosCounter; //TODO: TOTAL TEST POSITIVE HIT COUNTER
-        }
-
-        if (tempNegCounter != -1)
-        {
-            testData.totalTestNegativeHitCounter = tempNegCounter; //TODO: TOTAL TEST NEGATIVE HIT COUNTER
-        }
-
-        TimeSpan temPosTimer = raycaster.GetTimer("totalTestPositiveTimer");
-        TimeSpan tempNegTimer = raycaster.GetTimer("totalTestNegativeTimer");
-        if (temPosTimer != TimeSpan.Zero)
-        {
-            testData.totalTestPositiveTimer = FormatTimeSpan(temPosTimer); //TODO: TOTAL TEST POSITIVE TIMER
-        }
-
-        if (tempNegTimer != TimeSpan.Zero)
-        {
-            testData.totalTestNegativeTimer = FormatTimeSpan(tempNegTimer); //TODO: TOTAL TEST NEGATIVE TIMER
-        }
-
-        if (stopwatch.IsRunning)
-        {
-            stopwatch.Stop(); //Stop measuring totalTestTimeSpan
-            totalTestTimeSpan = stopwatch.Elapsed;
-        }
-        testData.totalTestTimer = FormatTimeSpan(totalTestTimeSpan); //TODO: TOTAL TEST TIMER
-
-        /* Per-Round Test Data */
-        testData.roundTimers = roundTimers; //TODO: ROUND TIMERS
-
-        /* Logs */
-        testData.characterSpawnsLog = spawner.GetSpawnsLog(); //TODO: CHARACTER SPAWNS LOG
-        testData.testerChoicesLog = raycaster.GetChoicesLog(); //TODO: TESTER CHOICES LOG
-    }
-
-    string FormatTimeSpan(TimeSpan timeSpan)
-    {
-        string formattedTimeSpanString = String.Format("{0:00}:{1:00}:{2:00}.{3:00}", timeSpan.Hours, timeSpan.Minutes, timeSpan.Seconds, timeSpan.Milliseconds / 10);
-        //FIXME: If result doesn't look good, try this (from https://gamedev.stackexchange.com/questions/80968/cant-consistently-add-to-timespan-for-unity-game)
-        //string formattedTimeSpanString = String.Format("{0}:{1}:{2}",timeSpan.Minutes,timeSpan.Seconds, timeSpan.Milliseconds);
-        return formattedTimeSpanString;
-    }
-
-    void CheckRoundTimer()
-    {
-        if (isInRound)
-        {
-            roundTimer += Time.deltaTime;
-        }
-    }
-
-    void SaveRoundTimer()
-    {
-        var currApproachName = currentProcedure[currentProcedureIndex].ToString();
-        var key = " ";
-        if (roundTimers.ContainsKey(currApproachName + "_" + currentRoundIndex))
-        {
-            key = currApproachName + "2_" + currentRoundIndex;
-        }
-        else
-        {
-            key = currApproachName + "_" + currentRoundIndex;
-        }
-
-        roundTimers.Add(key, roundTimer); // Save into Dictionary
-        roundTimer = 0f; //Reset roundTimer for next round
     }
 }

@@ -18,10 +18,11 @@ public class TestDataSaver : MonoBehaviour
 
     }
 
-    public void SaveTestDataToFile(TestData testData)
+
+    public void SaveTestDataToFile(TestData testDataToSave)
     {
         string savePath = Application.dataPath + ("/TestData/testData.txt");
-        string jsonFile = JsonUtility.ToJson(testData);
+        string jsonFile = JsonUtility.ToJson(testDataToSave);
 
         File.AppendAllText(savePath, jsonFile + Environment.NewLine);
     }

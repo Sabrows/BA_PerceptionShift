@@ -20,12 +20,22 @@ public class Raycaster : MonoBehaviour
     private Vector3 fwd;
     private int layerMask;
     private float hitDuration = 0;
-    private int totalPositiveHitCounter = 0;
-    private int totalNegativeHitCounter = 0;
-    private float totalPositiveTimer = 0f;
-    private float totalNegativeTimer = 0f;
+
+    private int[,] positiveHitCounterPerApproach;
+    private int[,] negativeHitCounterPerApproach;
+    private float[,] positiveHitTimerPerApproach;
+    private float[,] negativeHitTimerPerApproach;
     private List<string> choicesLog = new List<string>();
     private int logLineIndex = 0;
+
+    void Awake()
+    {
+        positiveHitCounterPerApproach = new int[controller.currentProcedure.Length, 1];
+        negativeHitCounterPerApproach = new int[controller.currentProcedure.Length, 1];
+
+        positiveHitTimerPerApproach = new float[controller.currentProcedure.Length, 1];
+        negativeHitTimerPerApproach = new float[controller.currentProcedure.Length, 1];
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -67,12 +77,12 @@ public class Raycaster : MonoBehaviour
                         raycastEnabled = false;
                         if (hitTag == "PositiveHit")
                         {
-                            totalPositiveHitCounter++;
+                            positiveHitCounterPerApproach[controller.currentProcedureIndex, 1]++; //Keep track on hit counter
                             UpdateChoicesLog(hit); //Log tester choice
                         }
                         else if (hitTag == "NegativeHit")
                         {
-                            totalNegativeHitCounter++;
+                            negativeHitCounterPerApproach[controller.currentProcedureIndex, 1]++; //Keep track on hit counter
                             UpdateChoicesLog(hit); //Log tester choice
                         }
 
@@ -89,70 +99,78 @@ public class Raycaster : MonoBehaviour
         }
     }
 
-    IEnumerator FindHeadset()
+    private IEnumerator FindHeadset()
     {
         headsetTransform = VRTK_DeviceFinder.DeviceTransform(VRTK_DeviceFinder.Devices.Headset);
         yield return new WaitForSeconds(1f);
     }
 
-    public int GetHitCounter(string wantedCounterName)
+    private void UpdateTimer(string hitObjectTag)
+    {
+        var currProcIndex = controller.currentProcedureIndex;
+        switch (hitObjectTag)
+        {
+            case "PositiveHit":
+                positiveHitTimerPerApproach[currProcIndex, 1] += Time.deltaTime;
+                break;
+
+            case "NegativeHit":
+                negativeHitTimerPerApproach[currProcIndex, 1] += Time.deltaTime;
+                break;
+
+            default:
+                Debug.Log("[Debug Note] Hit Object Tag: " + hitObjectTag + " not found!");
+                break;
+        }
+    }
+
+    private void UpdateChoicesLog(RaycastHit hitObject)
+    {
+        var currProcIndex = controller.currentProcedureIndex;
+        var currApproachName = controller.currentProcedure[currProcIndex];
+        var currRoundIndex = controller.currentRoundIndex;
+
+        var logLine = logLineIndex + ". In APPROACH: " + currApproachName + " at ROUND: " + currRoundIndex;
+        logLine += " the tester CHOSE: " + hitObject.transform.name + "." + Environment.NewLine;
+
+        choicesLog.Add(logLine);
+        logLineIndex++;
+    }
+
+
+    public int GetHitCounter(string wantedCounterName, int approachDataIndex)
     {
         switch (wantedCounterName)
         {
-            case "totalTestPositiveHitCounter":
-                return totalPositiveHitCounter;
+            case "positiveHitCounter":
+                return positiveHitCounterPerApproach[approachDataIndex, 1];
 
-            case "totalTestNegativeHitCounter":
-                return totalNegativeHitCounter;
+            case "negativeHitCounter":
+                return negativeHitCounterPerApproach[approachDataIndex, 1]; ;
 
             default:
+                Debug.Log("[Debug Note] Wanted Counter: " + wantedCounterName + " not found!");
                 return -1;
         }
     }
 
-    void UpdateTimer(string hitObjectTag)
+    public TimeSpan GetTimer(string wantedTimerName, int approachDataIndex)
     {
-        switch (hitObjectTag)
-        {
-            case "PositiveHit":
-                totalPositiveTimer += Time.deltaTime;
-                break;
-
-            case "NegativeHit":
-                totalNegativeTimer += Time.deltaTime;
-                break;
-
-            default:
-                break;
-        }
-    }
-
-    public TimeSpan GetTimer(string wantedTimerName)
-    {
+        TimeSpan temp = new TimeSpan();
         switch (wantedTimerName)
         {
-            case "totalTestPositiveTimer":
-                TimeSpan posTimeSpan = TimeSpan.FromSeconds(totalPositiveTimer);
-                return posTimeSpan;
+            case "positiveHitTimer":
+                temp = TimeSpan.FromSeconds(positiveHitTimerPerApproach[approachDataIndex, 1]);
+                return temp;
 
-            case "totalTestNegativeTimer":
-                TimeSpan negTimeSpan = TimeSpan.FromSeconds(totalNegativeTimer);
-                return negTimeSpan;
+            case "negativeHitTimer":
+                temp = TimeSpan.FromSeconds(negativeHitTimerPerApproach[approachDataIndex, 1]);
+                return temp;
 
             default:
+                Debug.Log("[Debug Note] Wanted Timer: " + wantedTimerName + " not found!");
                 return TimeSpan.Zero;
         }
-    }
-
-    void UpdateChoicesLog(RaycastHit hitObject)
-    {
-        var currProcIndex = controller.currentProcedureIndex;
-        var approachName = controller.currentProcedure[currProcIndex];
-        var currRoundIndex = controller.currentRoundIndex;
-
-        var logLine = logLineIndex + ". In APPROACH: " + controller.currentProcedure[controller.currentProcedureIndex] + " at ROUND: " + controller.currentRoundIndex + " the tester CHOSE: " + hitObject.transform.name + ". \n";
-        choicesLog.Add(logLine);
-        logLineIndex++;
     }
 
     public List<string> GetChoicesLog()

@@ -3,26 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public struct TestData
+public class TestData
 {
-    /* General Info */
+    /* General Data */
     public string testID;
-    public string selectedTestProcedure;
+    public string selectedTestProcedureName;
     public int usedRandomSeed;
-    public List<GameObject> shuffledPositiveCharacterOrder;
-    public List<GameObject> shuffledNegativeCharacterOrder;
+    public List<string> positiveCharacterOrderNameList;
+    public List<string> negativeCharacterOrderNameList;
 
-    /* Total Test Data */
-    public int totalTestPositiveHitCounter;
-    public int totalTestNegativeHitCounter;
-    public string totalTestPositiveTimer;
-    public string totalTestNegativeTimer;
-    public string totalTestTimer;
+    /* Per Approach Data */
+    public ApproachData[] approachData;
 
-    /* Per-Round Test Data */
-    public Dictionary<string, float> roundTimers;
-
-    /* Logs */
+    /* Log Data */
     public List<string> characterSpawnsLog;
     public List<string> testerChoicesLog;
 }

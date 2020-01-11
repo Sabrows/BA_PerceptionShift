@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
+using System;
 
 public class Spawner : MonoBehaviour
 {
@@ -43,9 +44,9 @@ public class Spawner : MonoBehaviour
         }
         else resultListLength = controller.amountOfRounds + 1;
 
-        Random.InitState(seed);
-        GenerateResultList(seed, posCharacters, orderPosCharacters);
-        GenerateResultList(seed, negCharacters, orderNegCharacters);
+        UnityEngine.Random.InitState(seed);
+        GenerateOrderList(seed, posCharacters, orderPosCharacters);
+        GenerateOrderList(seed, negCharacters, orderNegCharacters);
     }
 
     // Update is called once per frame
@@ -54,20 +55,36 @@ public class Spawner : MonoBehaviour
         borderHighlight.SetFloat("g_flOutlineWidth", outlineWidth); //Set material border width according to inspector input
     }
 
-    void GenerateResultList(int seed, List<GameObject> sourceList, List<GameObject> destList)
+    private void GenerateOrderList(int seed, List<GameObject> sourceList, List<GameObject> destList)
     {
         for (int i = 0; i < resultListLength; i++)
         {
-            var randomCharIndex = Random.Range(0, sourceList.Count);
+            var randomCharIndex = UnityEngine.Random.Range(0, sourceList.Count);
             GameObject charToList = sourceList[randomCharIndex];
             destList.Add(charToList);
         }
     }
 
+    private void UpdateSpawnsLog(int randSpIndex, GameObject randSp, GameObject otherSp, GameObject spawnedPos, GameObject spawnedNeg)
+    {
+        var currProcIndex = controller.currentProcedureIndex;
+        var currApproachName = controller.currentProcedure[currProcIndex];
+        var currRoundIndex = controller.currentRoundIndex;
+
+        var logLine = logLineIndex + ". In APPROACH: " + currApproachName + " at ROUND: " + currRoundIndex;
+        logLine += " the RANDOM SPAWNPOINT INDEX was: " + randSpIndex + ". ";
+        logLine += spawnedPos.name + " was SPAWNED at " + randSp.name + ", ";
+        logLine += spawnedNeg.name + " was SPAWNED at " + otherSp.name + "." + Environment.NewLine;
+
+        spawnsLog.Add(logLine);
+        logLineIndex++;
+    }
+
+
     public void Spawn(int roundCounter, Controller.HighlightingApproaches approach)
     {
         //Get random spawnpoint index
-        var randomSpawnpointIndex = Random.Range(0, spawnpoints.Count);
+        var randomSpawnpointIndex = UnityEngine.Random.Range(0, spawnpoints.Count);
 
         //Get spawnpoint with index
         GameObject randomSpawnpoint = spawnpoints[randomSpawnpointIndex];
@@ -138,33 +155,29 @@ public class Spawner : MonoBehaviour
         return seed;
     }
 
-    public List<GameObject> GetCharacterList(string wantedListName)
+    public List<string> GetCharacterList(string wantedListName)
     {
+        List<string> temp = new List<string>();
         switch (wantedListName)
         {
-            case "shuffledPositiveCharacterOrder":
-                return orderPosCharacters;
+            case "positiveCharacterOrderNameList":
+                foreach (GameObject character in orderPosCharacters)
+                {
+                    temp.Add(character.name);
+                }
+                return temp;
 
-            case "shuffledNegativeCharacterOrder":
-                return orderNegCharacters;
+            case "negativeCharacterOrderNameList":
+                foreach (GameObject character in orderNegCharacters)
+                {
+                    temp.Add(character.name);
+                }
+                return temp;
 
             default:
+                Debug.Log("[Debug Note] Wanted List: " + wantedListName + " not found!");
                 return null;
         }
-    }
-    void UpdateSpawnsLog(int randSpIndex, GameObject randSp, GameObject otherSp, GameObject spawnedPos, GameObject spawnedNeg)
-    {
-        var currProcIndex = controller.currentProcedureIndex;
-        var approachName = controller.currentProcedure[currProcIndex];
-        var currRoundIndex = controller.currentRoundIndex;
-
-        var logLine = logLineIndex + ". In APPROACH: " + controller.currentProcedure[controller.currentProcedureIndex] + " at ROUND: " + controller.currentRoundIndex;
-        logLine += " the RANDOM SPAWNPOINT INDEX was: " + randSpIndex + ". ";
-        logLine += spawnedPos.name + " was SPAWNED at " + randSp.name;
-        logLine += " ," + spawnedNeg.name + " was SPAWNED at " + otherSp.name + ". \n";
-
-        spawnsLog.Add(logLine);
-        logLineIndex++;
     }
 
     public List<string> GetSpawnsLog()
