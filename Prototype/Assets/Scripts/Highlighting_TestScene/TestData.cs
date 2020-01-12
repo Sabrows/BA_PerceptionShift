@@ -16,6 +16,6 @@ public class TestData
     public ApproachData[] approachData;
 
     /* Log Data */
-    public List<string> characterSpawnsLog;
-    public List<string> testerChoicesLog;
+    /*public List<string> characterSpawnsLog;
+    public List<string> testerChoicesLog;*/
 }

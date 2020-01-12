@@ -25,23 +25,20 @@ public class Raycaster : MonoBehaviour
     private int[,] negativeHitCounterPerApproach;
     private float[,] positiveHitTimerPerApproach;
     private float[,] negativeHitTimerPerApproach;
-    private List<string> choicesLog = new List<string>();
+    [SerializeField] private List<string> choicesLog = new List<string>();
     private int logLineIndex = 0;
-
-    void Awake()
-    {
-        positiveHitCounterPerApproach = new int[controller.currentProcedure.Length, 1];
-        negativeHitCounterPerApproach = new int[controller.currentProcedure.Length, 1];
-
-        positiveHitTimerPerApproach = new float[controller.currentProcedure.Length, 1];
-        negativeHitTimerPerApproach = new float[controller.currentProcedure.Length, 1];
-    }
 
     // Start is called before the first frame update
     void Start()
     {
         layerMask = 1 << 8;
         lineRenderer = GetComponent<LineRenderer>();
+
+        positiveHitCounterPerApproach = new int[controller.currentProcedure.Length, 1];
+        negativeHitCounterPerApproach = new int[controller.currentProcedure.Length, 1];
+
+        positiveHitTimerPerApproach = new float[controller.currentProcedure.Length, 1];
+        negativeHitTimerPerApproach = new float[controller.currentProcedure.Length, 1];
     }
 
     // Update is called once per frame
@@ -77,19 +74,22 @@ public class Raycaster : MonoBehaviour
                         raycastEnabled = false;
                         if (hitTag == "PositiveHit")
                         {
-                            positiveHitCounterPerApproach[controller.currentProcedureIndex, 1]++; //Keep track on hit counter
+                            positiveHitCounterPerApproach[controller.currentProcedureIndex, 0]++; //Keep track on hit counter
                             UpdateChoicesLog(hit); //Log tester choice
                         }
                         else if (hitTag == "NegativeHit")
                         {
-                            negativeHitCounterPerApproach[controller.currentProcedureIndex, 1]++; //Keep track on hit counter
+                            negativeHitCounterPerApproach[controller.currentProcedureIndex, 0]++; //Keep track on hit counter
                             UpdateChoicesLog(hit); //Log tester choice
                         }
 
-                        //Reset hitDuration for next round
-                        hitDuration = 0f;
+                        hitDuration = 0f; //Reset hitDuration for next round
                         controller.TriggerNextRound();
                     }
+                }
+                else
+                {
+                    hitDuration = 0f; //Reset hitDuration in case focus is not on collider anymore
                 }
             }
         }
@@ -111,11 +111,11 @@ public class Raycaster : MonoBehaviour
         switch (hitObjectTag)
         {
             case "PositiveHit":
-                positiveHitTimerPerApproach[currProcIndex, 1] += Time.deltaTime;
+                positiveHitTimerPerApproach[currProcIndex, 0] += Time.deltaTime;
                 break;
 
             case "NegativeHit":
-                negativeHitTimerPerApproach[currProcIndex, 1] += Time.deltaTime;
+                negativeHitTimerPerApproach[currProcIndex, 0] += Time.deltaTime;
                 break;
 
             default:
@@ -143,10 +143,10 @@ public class Raycaster : MonoBehaviour
         switch (wantedCounterName)
         {
             case "positiveHitCounter":
-                return positiveHitCounterPerApproach[approachDataIndex, 1];
+                return positiveHitCounterPerApproach[approachDataIndex, 0];
 
             case "negativeHitCounter":
-                return negativeHitCounterPerApproach[approachDataIndex, 1]; ;
+                return negativeHitCounterPerApproach[approachDataIndex, 0]; ;
 
             default:
                 Debug.Log("[Debug Note] Wanted Counter: " + wantedCounterName + " not found!");
@@ -160,11 +160,11 @@ public class Raycaster : MonoBehaviour
         switch (wantedTimerName)
         {
             case "positiveHitTimer":
-                temp = TimeSpan.FromSeconds(positiveHitTimerPerApproach[approachDataIndex, 1]);
+                temp = TimeSpan.FromSeconds(positiveHitTimerPerApproach[approachDataIndex, 0]);
                 return temp;
 
             case "negativeHitTimer":
-                temp = TimeSpan.FromSeconds(negativeHitTimerPerApproach[approachDataIndex, 1]);
+                temp = TimeSpan.FromSeconds(negativeHitTimerPerApproach[approachDataIndex, 0]);
                 return temp;
 
             default:

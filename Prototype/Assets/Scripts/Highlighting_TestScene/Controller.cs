@@ -42,15 +42,6 @@ public class Controller : MonoBehaviour
     private bool isInApproach = false;
     private float[,] timerPerApproach;
     private float[,] roundTimerPerApproach;
-    private Dictionary<int, string>[] roundTimersDictionaries;
-
-    void Awake()
-    {
-        timerPerApproach = new float[currentProcedure.Length, 1];
-        roundTimerPerApproach = new float[currentProcedure.Length, amountOfRounds];
-        roundTimersDictionaries = new Dictionary<int, string>[currentProcedure.Length];
-        testData = InitializeTestData(testData);
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -66,6 +57,11 @@ public class Controller : MonoBehaviour
             currentProcedureName = "testProcedure_B";
         }
 
+        testData = InitializeTestData(testData);
+
+        timerPerApproach = new float[currentProcedure.Length, 1];
+        roundTimerPerApproach = new float[currentProcedure.Length, amountOfRounds];
+
         TriggerNextRound();
     }
 
@@ -80,7 +76,7 @@ public class Controller : MonoBehaviour
     {
         testDataToInitialize = new TestData
         {
-            testID = (System.DateTime.Now).ToString(), //TEST ID
+            testID = (System.DateTime.Now).ToString("yyyy-MM-dd\\THH:mm:ss\\Z"), //TEST ID
             approachData = new ApproachData[currentProcedure.Length], //APPROACH DATA []
         };
 
@@ -98,6 +94,10 @@ public class Controller : MonoBehaviour
     private void EndTest()
     {
         testDataSaver.SaveTestDataToFile(CollectTestData(testData)); //Save data finally
+
+        testDataSaver.SaveLogToFile(testData.testID, spawner.GetSpawnsLog(), "characterSpawnsLog"); //Save Character Spawn Log
+        testDataSaver.SaveLogToFile(testData.testID, raycaster.GetChoicesLog(), "testerChoicesLog"); //Save Tester Choices Log
+
         UnityEditor.EditorApplication.isPlaying = false; //End Application
     }
 
@@ -126,7 +126,7 @@ public class Controller : MonoBehaviour
             }
 
             //* Timer *//
-            TimeSpan tempApprTimer = TimeSpan.FromSeconds(timerPerApproach[i, 1]);
+            TimeSpan tempApprTimer = TimeSpan.FromSeconds(timerPerApproach[i, 0]);
             testDataToFill.approachData[i].approachTimer = FormatTimeSpan(tempApprTimer); //APPROACH DATA [] APPROACH TIMER
 
             TimeSpan temPosTimer = raycaster.GetTimer("positiveHitTimer", i);
@@ -141,13 +141,21 @@ public class Controller : MonoBehaviour
                 testDataToFill.approachData[i].negativeHitTimer = FormatTimeSpan(tempNegTimer); //APPROACH DATA [] NEGATIVE HIT TIMER
             }
 
-            
-            testDataToFill.approachData[i].roundTimers = ; //TODO: APPROACH DATA [] ROUND TIMERS
+            testDataToFill.approachData[i].roundTimers = new List<string>(); //Initialize roundTimer List
+            var arrayLength = roundTimerPerApproach.GetLength(1);
+            for (int j = 0; j < arrayLength; j++)
+            {
+                TimeSpan tempRoundTimer = TimeSpan.FromSeconds(roundTimerPerApproach[i, j]);
+                var formattedTimer = FormatTimeSpan(tempRoundTimer);
+                testDataToFill.approachData[i].roundTimers.Add(formattedTimer); //APPROACH DATA [] ROUND TIMERS
+            }
+
+            //testDataSaver.SaveApproachDataToFile(testDataToFill.approachData[i]); //FIXME: Save Approach Data in separate file
         }
 
-        /* Log Data */
-        testDataToFill.characterSpawnsLog = spawner.GetSpawnsLog(); //CHARACTER SPAWNS LOG
-        testDataToFill.testerChoicesLog = raycaster.GetChoicesLog(); //TESTER CHOICES LOG
+        /* Log Data */ //FIXME: Comment in here and in TestData.cs if logs shall be attached to test data object. If not, logs will be saved in respective folder 
+        /*testDataToFill.characterSpawnsLog = spawner.GetSpawnsLog(); //CHARACTER SPAWNS LOG
+        testDataToFill.testerChoicesLog = raycaster.GetChoicesLog(); //TESTER CHOICES LOG*/
 
         return testDataToFill;
     }
@@ -164,7 +172,7 @@ public class Controller : MonoBehaviour
     {
         if (isInApproach)
         {
-            timerPerApproach[currentProcedureIndex, 1] += Time.deltaTime;
+            timerPerApproach[currentProcedureIndex, 0] += Time.deltaTime;
         }
     }
 
@@ -176,20 +184,6 @@ public class Controller : MonoBehaviour
         }
     }
 
-    private void SaveRoundTimer()
-    {
-        Dictionary<int, string> roundTimers = new Dictionary<int, string>();
-        var intKey = currentRoundIndex;
-
-        //Get and Format roundTimer value
-
-        for (int i = 0; i < )
-        TimeSpan tempValue = TimeSpan.FromSeconds(roundTimerPerApproach[currentProcedureIndex, currentRoundIndex]);
-        var stringValue = FormatTimeSpan(tempValue);
-
-        roundTimers.Add(intKey, stringValue); // Save into Dictionary
-    }
-
 
     public void TriggerNextRound()
     {
@@ -197,7 +191,6 @@ public class Controller : MonoBehaviour
         currentRoundIndex++; //Keep track on currentRound
         if (currentRoundIndex >= amountOfRounds)
         {
-            SaveRoundTimer(); //Save round times for approach to dictionary
             isInApproach = false; //Next Approach, stop measuring time
             if (currentProcedureIndex == currentProcedure.Length - 1) //If true, end test
             {

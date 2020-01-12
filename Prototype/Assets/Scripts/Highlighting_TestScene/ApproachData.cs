@@ -13,5 +13,5 @@ public struct ApproachData
     public string approachTimer;
     public string positiveHitTimer;
     public string negativeHitTimer;
-    public string[] roundTimers;
+    public List<string> roundTimers;
 }

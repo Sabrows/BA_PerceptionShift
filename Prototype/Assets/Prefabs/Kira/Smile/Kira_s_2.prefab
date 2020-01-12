@@ -889,7 +889,7 @@ GameObject:
   m_Component:
   - component: {fileID: 666534852027559099}
   - component: {fileID: 666534852027559096}
-  - component: {fileID: 1308469641549512414}
+  - component: {fileID: 8650087224230017774}
   m_Layer: 8
   m_Name: Kira_Head_B
   m_TagString: PositiveHit
@@ -1023,8 +1023,8 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000000029802322, y: 0.75561154, z: 0.11800833}
     m_Extent: {x: 0.13186814, y: 0.18903947, z: 0.16686101}
   m_DirtyAABB: 0
---- !u!64 &1308469641549512414
-MeshCollider:
+--- !u!65 &8650087224230017774
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -1033,10 +1033,9 @@ MeshCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Convex: 0
-  m_CookingOptions: 14
-  m_Mesh: {fileID: 4300000, guid: 535156c74f90dde48be444746515be0d, type: 3}
+  serializedVersion: 2
+  m_Size: {x: 0.40301198, y: 0.45142752, z: 0.42002836}
+  m_Center: {x: 0.003925718, y: 1.6228482, z: 0.030758137}
 --- !u!1 &666534852093932157
 GameObject:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ public class Spawner : MonoBehaviour
     [SerializeField] [Range(1f, 10f)] float arrowHeight;
 
     private int resultListLength;
-    private List<string> spawnsLog = new List<string>();
+    [SerializeField] private List<string> spawnsLog = new List<string>();
     private int logLineIndex = 0;
 
     // Start is called before the first frame update
