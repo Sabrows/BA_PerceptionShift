@@ -131,7 +131,7 @@ public class Raycaster : MonoBehaviour
         var currRoundIndex = controller.currentRoundIndex;
 
         var logLine = logLineIndex + ". In APPROACH: " + currApproachName + " at ROUND: " + currRoundIndex;
-        logLine += " the tester CHOSE: " + hitObject.transform.name + "." + Environment.NewLine;
+        logLine += " the tester CHOSE: " + hitObject.collider.transform.parent.name + "." + Environment.NewLine;
 
         choicesLog.Add(logLine);
         logLineIndex++;

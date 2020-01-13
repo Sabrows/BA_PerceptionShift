@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRTK;
 using System;
+using UnityEngine.SceneManagement;
 
 public class Controller : MonoBehaviour
 {
@@ -95,10 +96,10 @@ public class Controller : MonoBehaviour
     {
         testDataSaver.SaveTestDataToFile(CollectTestData(testData)); //Save data finally
 
-        testDataSaver.SaveLogToFile(testData.testID, spawner.GetSpawnsLog(), "characterSpawnsLog"); //Save Character Spawn Log
-        testDataSaver.SaveLogToFile(testData.testID, raycaster.GetChoicesLog(), "testerChoicesLog"); //Save Tester Choices Log
+        //testDataSaver.SaveLogToFile(testData.testID, spawner.GetSpawnsLog(), "characterSpawnsLog"); //Save Character Spawn Log
+        //testDataSaver.SaveLogToFile(testData.testID, raycaster.GetChoicesLog(), "testerChoicesLog"); //Save Tester Choices Log
 
-        UnityEditor.EditorApplication.isPlaying = false; //End Application
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //Load test end scene
     }
 
     private TestData CollectTestData(TestData testDataToFill)
@@ -154,8 +155,8 @@ public class Controller : MonoBehaviour
         }
 
         /* Log Data */ //FIXME: Comment in here and in TestData.cs if logs shall be attached to test data object. If not, logs will be saved in respective folder 
-        /*testDataToFill.characterSpawnsLog = spawner.GetSpawnsLog(); //CHARACTER SPAWNS LOG
-        testDataToFill.testerChoicesLog = raycaster.GetChoicesLog(); //TESTER CHOICES LOG*/
+        testDataToFill.characterSpawnsLog = spawner.GetSpawnsLog(); //CHARACTER SPAWNS LOG
+        testDataToFill.testerChoicesLog = raycaster.GetChoicesLog(); //TESTER CHOICES LOG
 
         return testDataToFill;
     }
