@@ -4,6 +4,7 @@ using UnityEngine;
 using VRTK;
 using System;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Controller : MonoBehaviour
 {
@@ -36,6 +37,7 @@ public class Controller : MonoBehaviour
     [SerializeField] [Range(0, 3)] public int currentProcedureIndex = 0; //Default = 0, public for Log generation
     [SerializeField] [Range(-1, 10)] public int currentRoundIndex = -1; //Default = -1, public for Log generation
     [SerializeField] [Range(1f, 5f)] float timeUntilSpawn = 1f;
+    [SerializeField] GameObject testEndCanvas;
 
     private string currentProcedureName;
     private TestData testData;
@@ -62,6 +64,8 @@ public class Controller : MonoBehaviour
 
         timerPerApproach = new float[currentProcedure.Length, 1];
         roundTimerPerApproach = new float[currentProcedure.Length, amountOfRounds];
+
+        testEndCanvas.SetActive(false);
 
         TriggerNextRound();
     }
@@ -99,7 +103,9 @@ public class Controller : MonoBehaviour
         //testDataSaver.SaveLogToFile(testData.testID, spawner.GetSpawnsLog(), "characterSpawnsLog"); //Save Character Spawn Log
         //testDataSaver.SaveLogToFile(testData.testID, raycaster.GetChoicesLog(), "testerChoicesLog"); //Save Tester Choices Log
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1); //Load test end scene
+        testEndCanvas.SetActive(true); //Display canvas text
+
+        Invoke("StopUnityEditor", 15f); //Stop Application
     }
 
     private TestData CollectTestData(TestData testDataToFill)
@@ -183,6 +189,11 @@ public class Controller : MonoBehaviour
         {
             roundTimerPerApproach[currentProcedureIndex, currentRoundIndex] += Time.deltaTime;
         }
+    }
+
+    private void StopUnityEditor()
+    {
+        UnityEditor.EditorApplication.isPlaying = false; //End Application
     }
 
 
