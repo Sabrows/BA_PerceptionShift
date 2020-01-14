@@ -73,6 +73,10 @@ public class Controller : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        Debug.Log("IsInApproach: " + isInApproach  + " >> " + timerPerApproach[currentProcedureIndex, 0]);
+        Debug.Log("IsInRound: " + isInRound  + " >> " + roundTimerPerApproach[currentProcedureIndex, currentRoundIndex]);
+
         UpdateApproachTimer();
         UpdateRoundTimer();
     }

@@ -1150,7 +1150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475404489}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 1.2, y: 0.05, z: 2.5}
+  m_LocalPosition: {x: 1.2, y: 0.05, z: 2}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 270728103}
@@ -3218,7 +3218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340354515}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -1.2, y: 0.05, z: 2.5}
+  m_LocalPosition: {x: -1.2, y: 0.05, z: 2}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1885516376}
@@ -3471,7 +3471,7 @@ MonoBehaviour:
   spawner: {fileID: 481637021}
   raycaster: {fileID: 1550289129}
   testDataSaver: {fileID: 1088108344}
-  procedures: 1
+  procedures: 0
   currentProcedure: 
   amountOfRounds: 6
   currentProcedureIndex: 0
