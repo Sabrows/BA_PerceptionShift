@@ -1131,8 +1131,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.4056212, y: 0.44757763, z: 0.44236192}
-  m_Center: {x: 0.0019303584, y: 1.8731421, z: 0.07280397}
+  m_Size: {x: 0.73478603, y: 0.6552799, z: 0.44236192}
+  m_Center: {x: 0.00042083586, y: 1.8522171, z: 0.07280398}
 --- !u!1 &6012632191453450677
 GameObject:
   m_ObjectHideFlags: 0
@@ -4052,7 +4052,7 @@ Transform:
   m_GameObject: {fileID: 6012632192578994931}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1.2}
+  m_LocalScale: {x: 1.1, y: 1.1, z: 1.1}
   m_Children:
   - {fileID: 6012632192021863432}
   - {fileID: 6012632192335801900}
@@ -4228,6 +4228,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HitBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 210025334741096087, guid: f5632fce29e653b4685ebbde51e1dfe2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2930087941268053215, guid: f5632fce29e653b4685ebbde51e1dfe2,
         type: 3}

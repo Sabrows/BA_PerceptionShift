@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.1802834, g: 0.22571397, b: 0.3069215, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028374, g: 0.2257147, b: 0.30692306, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1150,7 +1150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 475404489}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: 1.5, y: 0.05, z: 3.5}
+  m_LocalPosition: {x: 1.2, y: 0.05, z: 2.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 270728103}
@@ -2786,7 +2786,7 @@ PrefabInstance:
     - target: {fileID: 2500563040278346496, guid: 6b557096f0071014db61478dc6a73e7d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4
+      value: 3.42
       objectReference: {fileID: 0}
     - target: {fileID: 2500563040278346496, guid: 6b557096f0071014db61478dc6a73e7d,
         type: 3}
@@ -2836,7 +2836,7 @@ PrefabInstance:
     - target: {fileID: 2500563040278346496, guid: 6b557096f0071014db61478dc6a73e7d,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 2.65
+      value: 2.17
       objectReference: {fileID: 0}
     - target: {fileID: 2500563040278346496, guid: 6b557096f0071014db61478dc6a73e7d,
         type: 3}
@@ -2878,6 +2878,21 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 2500563040278346496, guid: 6b557096f0071014db61478dc6a73e7d,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.0060515
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500563040278346496, guid: 6b557096f0071014db61478dc6a73e7d,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.0060515
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500563040278346496, guid: 6b557096f0071014db61478dc6a73e7d,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.0060515
+      objectReference: {fileID: 0}
     - target: {fileID: 2500563041341854438, guid: 6b557096f0071014db61478dc6a73e7d,
         type: 3}
       propertyPath: m_LocalPosition.z
@@ -2913,7 +2928,7 @@ PrefabInstance:
       propertyPath: m_text
       value: "\nVielen Dank f\xFCr die Teilnahme an diesem Test!\n\n\nIch w\xFCrde
         mich sehr dar\xFCber freuen wenn Sie sich nun anschlie\xDFend kurz Zeit nehmen
-        w\xFCrden und den bereitgestellten Fragebogen ausf\xFCllen w\xFCrden."
+        w\xFCrden und mir ihre Einsch\xE4tzung zum Test nennen w\xFCrden."
       objectReference: {fileID: 0}
     - target: {fileID: 2500563041341854437, guid: 6b557096f0071014db61478dc6a73e7d,
         type: 3}
@@ -3203,7 +3218,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1340354515}
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0}
-  m_LocalPosition: {x: -1.5, y: 0.05, z: 3.5}
+  m_LocalPosition: {x: -1.2, y: 0.05, z: 2.5}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 1885516376}
@@ -3456,9 +3471,9 @@ MonoBehaviour:
   spawner: {fileID: 481637021}
   raycaster: {fileID: 1550289129}
   testDataSaver: {fileID: 1088108344}
-  procedures: 0
+  procedures: 1
   currentProcedure: 
-  amountOfRounds: 10
+  amountOfRounds: 6
   currentProcedureIndex: 0
   currentRoundIndex: -1
   timeUntilSpawn: 1
@@ -4186,7 +4201,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1892541081
 Transform:
   m_ObjectHideFlags: 0
@@ -4444,6 +4459,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997534979736}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: d466abb0259ee4545964561ffb05f014,
+        type: 3}
+      propertyPath: m_Name
+      value: Window
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: d466abb0259ee4545964561ffb05f014,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4509,11 +4529,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 2.1233084
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: d466abb0259ee4545964561ffb05f014,
-        type: 3}
-      propertyPath: m_Name
-      value: Window
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d466abb0259ee4545964561ffb05f014, type: 3}
 --- !u!4 &6173987996355594490 stripped
@@ -4529,6 +4544,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Armchair_5 (5)
+      objectReference: {fileID: 0}
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.454
@@ -4584,10 +4603,6 @@ PrefabInstance:
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Armchair_5 (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
@@ -4804,7 +4819,7 @@ Transform:
   m_GameObject: {fileID: 6173987996781837020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_Children:
   - {fileID: 6173987997028366353}
   - {fileID: 6173987997042991485}
@@ -4818,6 +4833,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Armchair_5 (3)
+      objectReference: {fileID: 0}
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.32
@@ -4873,10 +4892,6 @@ PrefabInstance:
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Armchair_5 (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
@@ -5075,6 +5090,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1594528109603708, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Coffee_Table_1 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 4052586060096664, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.049
@@ -5131,10 +5150,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2
       objectReference: {fileID: 0}
-    - target: {fileID: 1594528109603708, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Coffee_Table_1 (1)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
 --- !u!4 &6173987996871980003 stripped
@@ -5186,6 +5201,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Armchair_5 (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.47
@@ -5241,10 +5260,6 @@ PrefabInstance:
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Armchair_5 (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
@@ -5325,6 +5340,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987996897698744}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: da4fa5f67ce0e684cba51434ba656032,
+        type: 3}
+      propertyPath: m_Name
+      value: Wall_S_framed
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: da4fa5f67ce0e684cba51434ba656032,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5385,11 +5405,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.x
       value: 0.10000006
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: da4fa5f67ce0e684cba51434ba656032,
-        type: 3}
-      propertyPath: m_Name
-      value: Wall_S_framed
-      objectReference: {fileID: 0}
     - target: {fileID: -1504981713932161579, guid: da4fa5f67ce0e684cba51434ba656032,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5410,6 +5425,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997534979736}
     m_Modifications:
+    - target: {fileID: -927199367670048503, guid: 62fd44da83c9e3c4fa7f33758dcfaed7,
+        type: 3}
+      propertyPath: m_Name
+      value: Ado013
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: 62fd44da83c9e3c4fa7f33758dcfaed7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5485,11 +5505,6 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -12
       objectReference: {fileID: 0}
-    - target: {fileID: -927199367670048503, guid: 62fd44da83c9e3c4fa7f33758dcfaed7,
-        type: 3}
-      propertyPath: m_Name
-      value: Ado013
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 62fd44da83c9e3c4fa7f33758dcfaed7, type: 3}
 --- !u!4 &6173987997211221843 stripped
@@ -5505,6 +5520,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1594528109603708, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Coffee_Table_1
+      objectReference: {fileID: 0}
     - target: {fileID: 4052586060096664, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.37
@@ -5560,10 +5579,6 @@ PrefabInstance:
     - target: {fileID: 4052586060096664, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1594528109603708, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Coffee_Table_1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
@@ -5808,6 +5823,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Armchair_5 (1)
+      objectReference: {fileID: 0}
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2
@@ -5863,10 +5882,6 @@ PrefabInstance:
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalScale.z
       value: 1.2
-      objectReference: {fileID: 0}
-    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Armchair_5 (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
@@ -6006,6 +6021,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Armchair_5 (4)
+      objectReference: {fileID: 0}
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalPosition.x
       value: -2.09
@@ -6062,10 +6081,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2
       objectReference: {fileID: 0}
-    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Armchair_5 (4)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
 --- !u!4 &6173987997622457204 stripped
@@ -6081,6 +6096,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1594528109603708, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Coffee_Table_1 (2)
+      objectReference: {fileID: 0}
     - target: {fileID: 4052586060096664, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.543
@@ -6137,10 +6156,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2
       objectReference: {fileID: 0}
-    - target: {fileID: 1594528109603708, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Coffee_Table_1 (2)
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3a093adb7d50ddd409a07ac10323120d, type: 3}
 --- !u!4 &6173987997693205541 stripped
@@ -6187,6 +6202,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6173987997362190936}
     m_Modifications:
+    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
+      propertyPath: m_Name
+      value: RFAIPP_Armchair_5
+      objectReference: {fileID: 0}
     - target: {fileID: 4852974938841794, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0.32
@@ -6243,10 +6262,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1.2
       objectReference: {fileID: 0}
-    - target: {fileID: 1826851456360696, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
-      propertyPath: m_Name
-      value: RFAIPP_Armchair_5
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 20d3dde8cb6caa949ae3dd226db73e29, type: 3}
 --- !u!4 &6173987997946284035 stripped
@@ -6280,7 +6295,7 @@ PrefabInstance:
     - target: {fileID: 8669344391078130122, guid: 0dc28830851bf4a4e82f6d1cd7797947,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.22
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8669344391078130122, guid: 0dc28830851bf4a4e82f6d1cd7797947,
         type: 3}
@@ -6361,12 +6376,12 @@ PrefabInstance:
         type: 3}
       propertyPath: setups.Array.data[1]
       value: 
-      objectReference: {fileID: 8669344392125771521}
+      objectReference: {fileID: 398409387}
     - target: {fileID: 8669344391078130123, guid: 0dc28830851bf4a4e82f6d1cd7797947,
         type: 3}
       propertyPath: setups.Array.data[0]
       value: 
-      objectReference: {fileID: 398409387}
+      objectReference: {fileID: 8669344392125771521}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0dc28830851bf4a4e82f6d1cd7797947, type: 3}
 --- !u!4 &8669344392125771520 stripped

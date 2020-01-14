@@ -1034,8 +1034,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.40301198, y: 0.45142752, z: 0.42002836}
-  m_Center: {x: 0.003925718, y: 1.6228482, z: 0.030758137}
+  m_Size: {x: 0.729666, y: 0.6010331, z: 0.42002836}
+  m_Center: {x: 0.013590805, y: 1.6184087, z: 0.030758137}
 --- !u!1 &666534852093932157
 GameObject:
   m_ObjectHideFlags: 0
@@ -2588,7 +2588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &666534852813337605
 Transform:
   m_ObjectHideFlags: 0
@@ -2621,6 +2621,7 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a3da22c9758d0e34daf176cef6b3416c, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -3663,7 +3664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &666534853327058835
 Transform:
   m_ObjectHideFlags: 0
@@ -3696,7 +3697,6 @@ SkinnedMeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: a3da22c9758d0e34daf176cef6b3416c, type: 2}
-  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

@@ -103,6 +103,8 @@ public class Controller : MonoBehaviour
         //testDataSaver.SaveLogToFile(testData.testID, spawner.GetSpawnsLog(), "characterSpawnsLog"); //Save Character Spawn Log
         //testDataSaver.SaveLogToFile(testData.testID, raycaster.GetChoicesLog(), "testerChoicesLog"); //Save Tester Choices Log
 
+        spawner.RemovePreviousCharacters();
+
         testEndCanvas.SetActive(true); //Display canvas text
 
         Invoke("StopUnityEditor", 15f); //Stop Application
