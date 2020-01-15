@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1457547669}
-  seed: 42
+  seed: 24
   spawnpoints:
   - {fileID: 1340354515}
   - {fileID: 475404489}
