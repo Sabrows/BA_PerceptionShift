@@ -1201,7 +1201,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   controller: {fileID: 1457547669}
-  seed: 24
+  seed: 42
   spawnpoints:
   - {fileID: 1340354515}
   - {fileID: 475404489}
@@ -2928,7 +2928,7 @@ PrefabInstance:
       propertyPath: m_text
       value: "\nVielen Dank f\xFCr die Teilnahme an diesem Test!\n\n\nIch w\xFCrde
         mich sehr dar\xFCber freuen wenn Sie sich nun anschlie\xDFend kurz Zeit nehmen
-        w\xFCrden und mir ihre Einsch\xE4tzung zum Test nennen w\xFCrden."
+        w\xFCrden und mir eine Einsch\xE4tzung zum Test geben w\xFCrden."
       objectReference: {fileID: 0}
     - target: {fileID: 2500563041341854437, guid: 6b557096f0071014db61478dc6a73e7d,
         type: 3}
@@ -3471,10 +3471,10 @@ MonoBehaviour:
   spawner: {fileID: 481637021}
   raycaster: {fileID: 1550289129}
   testDataSaver: {fileID: 1088108344}
-  procedures: 0
+  procedures: 1
   currentProcedure: 
   amountOfRounds: 6
-  currentProcedureIndex: 0
+  currentProcedureIndex: 1
   currentRoundIndex: -1
   timeUntilSpawn: 1
   testEndCanvas: {fileID: 1235795322}
