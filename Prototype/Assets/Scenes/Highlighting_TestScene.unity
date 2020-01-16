@@ -3474,7 +3474,7 @@ MonoBehaviour:
   procedures: 1
   currentProcedure: 
   amountOfRounds: 6
-  currentProcedureIndex: 1
+  currentProcedureIndex: 0
   currentRoundIndex: -1
   timeUntilSpawn: 1
   testEndCanvas: {fileID: 1235795322}
