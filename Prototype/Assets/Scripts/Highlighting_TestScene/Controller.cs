@@ -9,18 +9,18 @@ using UnityEngine.UI;
 public class Controller : MonoBehaviour
 {
     [Header("Class References")]
-    [SerializeField] Spawner spawner;
     [SerializeField] Raycaster raycaster;
+    [SerializeField] Spawner spawner;
     [SerializeField] TestDataSaver testDataSaver;
 
-    enum Procedures
+    private enum Procedures
     {
         A,
         B
     }
 
     [Header("Procedure Selection")]
-    [SerializeField] Procedures procedures = Procedures.A;
+    [SerializeField] private Procedures procedures = Procedures.A;
 
     public enum HighlightingApproaches
     {
@@ -28,16 +28,16 @@ public class Controller : MonoBehaviour
         Border,
         Arrow
     }
-    HighlightingApproaches[] testProcedure_A = new HighlightingApproaches[] { HighlightingApproaches.None, HighlightingApproaches.Border, HighlightingApproaches.None };
-    HighlightingApproaches[] testProcedure_B = new HighlightingApproaches[] { HighlightingApproaches.None, HighlightingApproaches.Arrow, HighlightingApproaches.None };
+    private HighlightingApproaches[] testProcedure_A = new HighlightingApproaches[] { HighlightingApproaches.None, HighlightingApproaches.Border, HighlightingApproaches.None };
+    private HighlightingApproaches[] testProcedure_B = new HighlightingApproaches[] { HighlightingApproaches.None, HighlightingApproaches.Arrow, HighlightingApproaches.None };
     public HighlightingApproaches[] currentProcedure; //public for Log generation
 
     [Header("Development Settings")]
     [SerializeField] [Range(2, 16)] public int amountOfRounds = 10;
     [SerializeField] [Range(0, 3)] public int currentProcedureIndex = 0; //Default = 0, public for Log generation
     [SerializeField] [Range(-1, 10)] public int currentRoundIndex = -1; //Default = -1, public for Log generation
-    [SerializeField] [Range(1f, 5f)] float timeUntilSpawn = 1f;
-    [SerializeField] GameObject testEndCanvas;
+    [SerializeField] [Range(1f, 5f)] private float timeUntilSpawn = 1f;
+    [SerializeField] private GameObject testEndCanvas;
 
     private string currentProcedureName;
     private TestData testData;

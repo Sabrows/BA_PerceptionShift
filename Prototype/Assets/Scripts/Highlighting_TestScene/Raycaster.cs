@@ -10,8 +10,8 @@ public class Raycaster : MonoBehaviour
     [SerializeField] Controller controller;
 
     [Header("Development Settings")]
-    [SerializeField] float maxHitDuration = 3f;
-    [SerializeField] bool lineRendererIsActive = false;
+    [SerializeField] private float maxHitDuration = 3f;
+    [SerializeField] private bool lineRendererIsActive = false;
 
     [HideInInspector] public bool raycastEnabled = true;
 

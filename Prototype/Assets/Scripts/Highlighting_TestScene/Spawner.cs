@@ -13,22 +13,22 @@ public class Spawner : MonoBehaviour
     [SerializeField] private int seed = 42;
 
     [Header("Spawnpoints List")]
-    [SerializeField] List<GameObject> spawnpoints;
+    [SerializeField] private List<GameObject> spawnpoints;
 
     [Header("Character Lists")]
-    [SerializeField] List<GameObject> posCharacters = new List<GameObject>();
-    [SerializeField] List<GameObject> negCharacters = new List<GameObject>();
-    [SerializeField] List<GameObject> orderPosCharacters = new List<GameObject>();
-    [SerializeField] List<GameObject> orderNegCharacters = new List<GameObject>();
-    [SerializeField] List<GameObject> alreadySpawnedCharacters = new List<GameObject>();
+    [SerializeField] private List<GameObject> posCharacters = new List<GameObject>();
+    [SerializeField] private List<GameObject> negCharacters = new List<GameObject>();
+    [SerializeField] private List<GameObject> orderPosCharacters = new List<GameObject>();
+    [SerializeField] private List<GameObject> orderNegCharacters = new List<GameObject>();
+    [SerializeField] private List<GameObject> alreadySpawnedCharacters = new List<GameObject>();
 
     [Header("Settings HighlightingApproach Border")]
-    [SerializeField] Material borderHighlight;
-    [SerializeField] [Range(0.001f, 0.01f)] float outlineWidth = 0.005f;
+    [SerializeField] private Material borderHighlight;
+    [SerializeField] [Range(0.001f, 0.01f)] private float outlineWidth = 0.005f;
 
     [Header("Settings HighlightingApproach Arrow")]
-    [SerializeField] GameObject arrow;
-    [SerializeField] [Range(1f, 10f)] float arrowHeight;
+    [SerializeField] private GameObject arrow;
+    [SerializeField] [Range(1f, 10f)] private float arrowHeight;
 
     private int resultListLength;
     [SerializeField] private List<string> spawnsLog = new List<string>();
