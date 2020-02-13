@@ -5,6 +5,7 @@ using VRTK;
 using System;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using UnityEditor;
 
 public class Controller : MonoBehaviour
 {
@@ -199,7 +200,10 @@ public class Controller : MonoBehaviour
 
     private void StopUnityEditor()
     {
-        UnityEditor.EditorApplication.isPlaying = false; //End Application
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false; //End Application
+        #endif
+        Application.Quit();
     }
 
 

@@ -3468,10 +3468,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73849212d4db38b4490309fe573c219b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawner: {fileID: 481637021}
   raycaster: {fileID: 1550289129}
+  spawner: {fileID: 481637021}
   testDataSaver: {fileID: 1088108344}
-  procedures: 1
+  procedures: 0
   currentProcedure: 
   amountOfRounds: 6
   currentProcedureIndex: 0
